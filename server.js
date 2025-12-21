@@ -28,6 +28,7 @@ app.get("/crops", async (req, res) => {
   res.json(crops);
 });
 
+
 app.get("/crops/:id", async (req, res) => {
   const crop = await db.collection("crops").findOne({ _id: new ObjectId(req.params.id) });
   if (!crop) return res.status(404).json({ message: "Crop not found" });
@@ -40,6 +41,7 @@ app.post("/crops", async (req, res) => {
   const result = await db.collection("crops").insertOne(crop);
   res.json({ insertedId: result.insertedId });
 });
+
 
 app.delete("/crops/:id", async (req, res) => {
   await db.collection("crops").deleteOne({
